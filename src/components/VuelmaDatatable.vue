@@ -5,9 +5,8 @@
         <th
           class="Vuelma-Datatable__header"
           v-for="column in columns"
-        >
-          {{ column.header }}
-        </th>
+          v-html="column.header"
+        ></th>
       </tr>
     </thead>
 
@@ -20,7 +19,12 @@
           class="Vuelma-Datatable__cell"
           v-for="column in columns"
         >
-          {{ get(row, column.name) }}
+          <slot
+            :row="row"
+            :name="column.name"
+          >
+            {{ get(row, column.name) }}
+          </slot>
         </td>
       </tr>
     </tbody>
@@ -51,6 +55,9 @@ export default {
       });
 
       return value || fallback;
+    },
+    hasSlot(slot) {
+      return !!this.$scopedSlots[slot];
     },
   },
 };
