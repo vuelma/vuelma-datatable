@@ -5,8 +5,15 @@
         <th
           class="Vuelma-Datatable__header"
           v-for="column in columns"
-          v-html="column.header"
-        ></th>
+          @click="updateSort(column.name)"
+        >
+          <span v-html="column.header"></span>
+
+          <span
+            v-if="sort.replace('-', '') === column.name"
+            v-html="(sort === column.name) ? sortAsc : sortDesc"
+          ></span>
+        </th>
       </tr>
     </thead>
 
@@ -43,8 +50,35 @@ export default {
       type: Array,
       required: true,
     },
+
+    /**
+     * Sort functionality props
+     */
+    sort: {
+      type: String,
+      default: '',
+    },
+    sortAsc: {
+      type: String,
+      default: '+',
+    },
+    sortDesc: {
+      type: String,
+      default: '-',
+    },
   },
   methods: {
+    /**
+     * Emit an update sort event to be handled
+     * outside the component.
+     */
+    updateSort(name) {
+      if (name === this.sort) {
+        this.$emit('update:sort', `${this.sort}-`);
+      } else {
+        this.$emit('update:sort', name);
+      }
+    },
     get(row, column, fallback = '') {
       const keys = column.split('.');
       let value = null;
