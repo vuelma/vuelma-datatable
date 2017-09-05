@@ -88,6 +88,9 @@
 export default {
   name: 'vuelma-datatable',
   props: {
+    /**
+     * Table props.
+     */
     columns: {
       type: Array,
       required: true,
@@ -98,7 +101,7 @@ export default {
     },
 
     /**
-     * Sort functionality props
+     * Sort functionality props.
      */
     sort: {
       type: String,
@@ -114,7 +117,7 @@ export default {
     },
 
     /**
-     * Filter params props
+     * Filter params props.
      */
     filterParams: Object,
   },
@@ -171,12 +174,15 @@ export default {
 
     /**
      * Emit an update for filterParams that can be handled
-     * outside the component
+     * outside the component.
      */
     updateFilterParams({ target }) {
       this.$emit('update:filterParams', { ...this.filterParams, [target.name]: target.value });
     },
 
+    /**
+     * Retrieve deep object property.
+     */
     get(row, column, fallback = '') {
       const keys = column.split('.');
       let value = null;
@@ -187,9 +193,6 @@ export default {
       });
 
       return value || fallback;
-    },
-    hasSlot(slot) {
-      return !!this.$scopedSlots[slot];
     },
   },
 };
