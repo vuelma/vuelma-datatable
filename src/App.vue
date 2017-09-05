@@ -40,6 +40,11 @@
             },
           ],
         },
+        {
+          header: 'Actions',
+          name: 'actions',
+          filter: false,
+        },
       ]"
       :rows="rows"
       :sort="sort"
@@ -47,6 +52,15 @@
       :filter-params.sync="filterParams"
       @update:sort="updateSort"
     >
+      <template scope="props" slot="actions">
+        <button
+          class="button"
+          @click="view(props.row)"
+        >
+          View
+        </button>
+      </template>
+
       <template scope="props" slot="age">
         <span @click="$emit('watever', props.row)"> {{ props.row.age }} years old </span>
       </template>
@@ -123,6 +137,9 @@ export default {
   methods: {
     updateSort(sort) {
       this.sort = sort;
+    },
+    view(row) {
+      console.log(row); // eslint-disable-line no-console
     },
   },
 };
