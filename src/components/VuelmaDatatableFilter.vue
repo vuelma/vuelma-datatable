@@ -49,13 +49,11 @@ export default {
      * Returns the key/name of the column
      */
     columnKey() {
-      if (this.isInput(this.column.filter)) {
-        return (typeof this.column.filter === 'boolean') ? this.column.name : this.column.filter;
-      } else if (this.isSelect(this.column.filter)) {
+      if (this.isSelect(this.column.filter)) {
         return (this.column.filter.key) ? this.column.filter.key : this.column.name;
       }
 
-      return '';
+      return (typeof this.column.filter === 'boolean') ? this.column.name : this.column.filter;
     },
   },
   methods: {
