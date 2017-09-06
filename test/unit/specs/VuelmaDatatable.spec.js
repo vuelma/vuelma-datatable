@@ -2,27 +2,6 @@
 import Vue from 'vue';
 import VuelmaDatatable from '@/components/VuelmaDatatable';
 
-function getView() {
-  return new Vue({
-    template: '<datatable ref="datatable" :columns="[ { header: \'Name\', name: \'name\', filter: \'name\', }, { header: \'<i>Age</i>\', name: \'age\', filter: true, }, { header: \'Email\', name: \'email\', filter: { options: [ { label: \'all emails\', value: \'\', }, \'@gmail.com\', \'@hotmail.com\', \'@yahoo.com\', ], key: \'email\', }, }, { header: \'Sex\', name: \'sex\', filter: [ \'Male\', \'Female\', { label: \'All Sex\', value: \'\', }, ], }, { header: \'Actions\', name: \'actions\', filter: false, }, ]" :rows="rows" :sort.sync="sort" :filter-params.sync="filterParams"></datatable>',
-    components: {
-      datatable: VuelmaDatatable,
-    },
-    data() {
-      return {
-        rows: [],
-        sort: '',
-        filterParams: {
-          name: '',
-          age: '',
-          email: '',
-          sex: '',
-        },
-      };
-    },
-  }).$mount();
-}
-
 function getComponent(newProps = {}) {
   const Constructor = Vue.extend(VuelmaDatatable);
   const propsData = {
@@ -87,33 +66,36 @@ function getComponent(newProps = {}) {
 
 describe('VuelmaDatatable.vue', () => {
   describe('updateSort()', () => {
-    const vm = getView();
-    it('sort should update for ascending', () => {
-      vm.$refs.datatable.updateSort('name');
-      expect(vm.sort).to.eql('name');
-    });
+    it('should dispatch update:sort with the right payload', () => {
+      let vm = getComponent();
+      let spy = sinon.spy();
+      vm.$on('update:sort', spy);
+      vm.updateSort('name');
 
-    it('sort should update for descending', (done) => {
-      vm.sort = 'name';
+      expect(spy).to.have.been.calledWith('name');
 
-      Vue.nextTick(() => {
-        vm.$refs.datatable.updateSort('name');
-        expect(vm.sort).to.eql('name-');
-        done();
-      });
+      vm = getComponent({ sort: 'name' });
+      spy = sinon.spy();
+      vm.$on('update:sort', spy);
+      vm.updateSort('name');
+
+      expect(spy).to.have.been.calledWith('name-');
     });
   });
 
   describe('updateFilterParams()', () => {
-    const vm = getView();
-    it('should update filterParams', (done) => {
-      vm.filterParams = {};
-
-      Vue.nextTick(() => {
-        vm.$refs.datatable.updateFilterParams({ name: 'email', value: '@test.com' });
-        expect(vm.filterParams.email).to.eql('@test.com');
-        done();
+    it('should dispatch update:filterParams with the right payload', () => {
+      const vm = getComponent({
+        filterParams: {
+          name: '',
+          email: '',
+        },
       });
+      const spy = sinon.spy();
+      vm.$on('update:filterParams', spy);
+      vm.updateFilterParams({ name: 'email', value: '@test.com' });
+
+      expect(spy).to.have.been.calledWith({ name: '', email: '@test.com' });
     });
   });
 
