@@ -77,13 +77,11 @@
 </template>
 
 <script>
-import Hello from './components/Hello';
 import Datatable from './components/VuelmaDatatable';
 
 export default {
   name: 'app',
   components: {
-    Hello,
     Datatable,
   },
   data() {
