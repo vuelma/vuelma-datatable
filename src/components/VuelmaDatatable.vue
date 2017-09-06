@@ -51,7 +51,7 @@
             :row="row"
             :name="column.name"
           >
-            {{ get(row, column.name) }}
+            {{ extract(row, column.name) }}
           </slot>
         </td>
       </tr>
@@ -133,7 +133,7 @@ export default {
     /**
      * Retrieve deep object property.
      */
-    get(row, column, fallback = '') {
+    extract(row, column, fallback = '') {
       const keys = column.split('.');
       let value = null;
       keys.forEach((key) => {
