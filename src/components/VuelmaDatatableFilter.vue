@@ -2,8 +2,8 @@
   <input
     class="Vuelma-Datatable__input input"
     type="text"
-    :name="(typeof column.filter === 'boolean') ? column.name : column.filter"
-    :value="filterParams[(typeof column.filter === 'boolean') ? column.name : column.filter]"
+    :name="columnKey"
+    :value="filterParams[columnKey]"
     v-if="isInput(column.filter)"
     @input="$emit('update', $event.target)"
   >
@@ -12,8 +12,8 @@
     v-else-if="isSelect(column.filter)"
   >
     <select
-      :name="(column.filter.key) ? column.filter.key : column.name"
-      :value="filterParams[(column.filter.key) ? column.filter.key : column.name]"
+      :name="columnKey"
+      :value="filterParams[columnKey]"
       @input="$emit('update', $event.target)"
     >
       <option
@@ -42,6 +42,20 @@ export default {
     filterParams: {
       required: true,
       type: Object,
+    },
+  },
+  computed: {
+    /**
+     * Returns the key/name of the column
+     */
+    columnKey() {
+      if (this.isInput(this.column.filter)) {
+        return (typeof this.column.filter === 'boolean') ? this.column.name : this.column.filter;
+      } else if (this.isSelect(this.column.filter)) {
+        return (this.column.filter.key) ? this.column.filter.key : this.column.name;
+      }
+
+      return '';
     },
   },
   methods: {
