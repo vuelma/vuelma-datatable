@@ -4,12 +4,12 @@
     type="text"
     :name="columnKey"
     :value="filterParams[columnKey]"
-    v-if="isInput(column.filter)"
+    v-if="isInput"
     @input="$emit('update', $event.target)"
   >
   <div
     class="select is-fullwidth"
-    v-else-if="isSelect(column.filter)"
+    v-else-if="isSelect"
   >
     <select
       :name="columnKey"
@@ -49,22 +49,21 @@ export default {
      * Returns the key/name of the column
      */
     columnKey() {
-      if (this.isSelect(this.column.filter)) {
+      if (this.isSelect) {
         return (this.column.filter.key) ? this.column.filter.key : this.column.name;
       }
 
       return (typeof this.column.filter === 'boolean') ? this.column.name : this.column.filter;
     },
-  },
-  methods: {
+
     /**
      * Checks if the filter satisfies the condition
      * to render input tag.
      */
-    isInput(filter) {
+    isInput() {
       if (
-        (typeof filter === 'boolean' && filter)
-        || (typeof filter === 'string' && filter)
+        (typeof this.column.filter === 'boolean' && this.column.filter)
+        || (typeof this.column.filter === 'string' && this.column.filter)
       ) {
         return true;
       }
@@ -76,10 +75,10 @@ export default {
      * Checks if the filter satisfies the condition
      * to render select tag.
      */
-    isSelect(filter) {
+    isSelect() {
       if (
-        Array.isArray(filter)
-        || (typeof filter === 'object')
+        Array.isArray(this.column.filter)
+        || (typeof this.column.filter === 'object')
       ) {
         return true;
       }
