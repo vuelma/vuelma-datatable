@@ -1,9 +1,23 @@
 {
   "name": "vuelma-datatable",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Datatable component powered by Vuelma",
+  "keywords": [
+    "vue",
+    "bulma",
+    "components",
+    "javascript",
+    "datatable"
+  ],
+  "homepage": "https://vuelma.github.io/vuelma-datatable",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vuelma/vuelma-datatable"
+  },
+  "bugs": "https://github.com/vuelma/vuelma-datatable/issues",
+  "license": "MIT",
   "author": "Isaiah Cruz <isaiahgcruz@gmail.com>",
-  "private": true,
+  "main": "index.js",
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
