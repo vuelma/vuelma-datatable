@@ -17,7 +17,7 @@
   "bugs": "https://github.com/vuelma/vuelma-datatable/issues",
   "license": "MIT",
   "author": "Isaiah Cruz <isaiahgcruz@gmail.com>",
-  "main": "index.js",
+  "main": "./src/components/VuelmaDatatable.vue",
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
