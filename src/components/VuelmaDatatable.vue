@@ -5,12 +5,12 @@
         <th
           class="Vuelma-Datatable__header"
           v-for="column in columns"
-          @click="updateSort(column.name)"
+          @click="updateSort(column)"
         >
           <span v-html="column.header"></span>
 
           <span
-            v-if="sort.replace('-', '') === column.name"
+            v-if="sort.replace('-', '') === column.name && sort"
             v-html="(sort === column.name) ? sortAsc : sortDesc"
           ></span>
         </th>
@@ -114,11 +114,13 @@ export default {
      * Emit an update sort event to be handled
      * outside the component.
      */
-    updateSort(name) {
-      if (name === this.sort) {
-        this.$emit('update:sort', `-${this.sort}`);
-      } else {
-        this.$emit('update:sort', name);
+    updateSort(column) {
+      if (column.sort) {
+        if (column.name === this.sort) {
+          this.$emit('update:sort', `-${this.sort}`);
+        } else {
+          this.$emit('update:sort', column.name);
+        }
       }
     },
 

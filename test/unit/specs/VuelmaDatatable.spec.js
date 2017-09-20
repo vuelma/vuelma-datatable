@@ -10,11 +10,13 @@ function getComponent(newProps = {}) {
         header: 'Name',
         name: 'name',
         filter: 'name',
+        sort: true,
       },
       {
         header: '<i>Age</i>',
         name: 'age',
         filter: true,
+        sort: true,
       },
       {
         header: 'Email',
@@ -31,6 +33,7 @@ function getComponent(newProps = {}) {
           ],
           key: 'email',
         },
+        sort: true,
       },
       {
         header: 'Sex',
@@ -43,11 +46,13 @@ function getComponent(newProps = {}) {
             value: '',
           },
         ],
+        sort: true,
       },
       {
         header: 'Actions',
         name: 'actions',
         filter: false,
+        sort: false,
       },
     ],
     rows: [],
@@ -70,16 +75,22 @@ describe('VuelmaDatatable.vue', () => {
       let vm = getComponent();
       let spy = sinon.spy();
       vm.$on('update:sort', spy);
-      vm.updateSort('name');
+      vm.updateSort(vm.columns[0]);
 
       expect(spy).to.have.been.calledWith('name');
 
       vm = getComponent({ sort: 'name' });
       spy = sinon.spy();
       vm.$on('update:sort', spy);
-      vm.updateSort('name');
+      vm.updateSort(vm.columns[0]);
 
       expect(spy).to.have.been.calledWith('-name');
+
+      spy = sinon.spy();
+      vm.$on('update:sort', spy);
+      vm.updateSort({ ...vm.columns[0], sort: false });
+
+      expect(spy).to.have.been.not.calledWith('name');
     });
   });
 
