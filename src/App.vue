@@ -6,11 +6,13 @@
           header: 'Name',
           name: 'name',
           filter: 'name',
+          sort: true,
         },
         {
           header: '<i>Age</i>',
           name: 'age',
           filter: true,
+          sort: true,
         },
         {
           header: 'Email',
@@ -27,6 +29,7 @@
             ],
             key: 'email',
           },
+          sort: true,
         },
         {
           header: 'Sex',
@@ -39,11 +42,11 @@
               value: '',
             },
           ],
+          sort: true,
         },
         {
           header: 'Actions',
           name: 'actions',
-          filter: false,
         },
       ]"
       :rows="rows"
