@@ -79,7 +79,7 @@ describe('VuelmaDatatable.vue', () => {
       vm.$on('update:sort', spy);
       vm.updateSort('name');
 
-      expect(spy).to.have.been.calledWith('name-');
+      expect(spy).to.have.been.calledWith('-name');
     });
   });
 

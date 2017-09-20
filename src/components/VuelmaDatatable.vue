@@ -116,7 +116,7 @@ export default {
      */
     updateSort(name) {
       if (name === this.sort) {
-        this.$emit('update:sort', `${this.sort}-`);
+        this.$emit('update:sort', `-${this.sort}`);
       } else {
         this.$emit('update:sort', name);
       }
