@@ -108,7 +108,7 @@ export default {
         rows = rows.filter(row => String(row[key]).includes(this.filterParams[key]));
       });
 
-      const sort = (this.sort.charAt(this.sort.length - 1) === '-') ? this.sort.slice(0, -1) : this.sort;
+      const sort = (this.sort.charAt(0) === '-') ? this.sort.slice(1, this.sort.length) : this.sort;
 
       rows.sort((rowA, rowB) => {
         const a = String(rowA[sort]).toUpperCase();
@@ -125,7 +125,7 @@ export default {
         return 0;
       });
 
-      if (this.sort.charAt(this.sort.length - 1) === '-') {
+      if (this.sort.charAt(0) === '-') {
         rows.reverse();
       }
 
