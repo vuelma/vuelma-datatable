@@ -144,7 +144,7 @@ export default {
         }
       });
 
-      return value || fallback;
+      return (value === undefined || value === null) ? fallback : value;
     },
   },
 };
