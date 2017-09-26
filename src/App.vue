@@ -55,6 +55,9 @@
       :filter-params.sync="filterParams"
       @update:sort="updateSort"
     >
+      <template slot="empty">
+        No results found.
+      </template>
       <template scope="props" slot="actions">
         <button
           class="button"
@@ -152,6 +155,10 @@ export default {
 
   &__header {
     cursor: pointer;
+  }
+
+  .Vuelma-Datatable__cell-empty {
+    text-align: center;
   }
 }
 </style>

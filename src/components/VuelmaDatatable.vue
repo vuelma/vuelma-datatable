@@ -55,6 +55,19 @@
           </slot>
         </td>
       </tr>
+
+      <tr
+        class="Vuelma-Datatable__row-empty"
+        v-if="rows.length <= 0 && $slots.empty"
+      >
+        <td
+          class="Vuelma-Datatable__cell-empty"
+          :colspan="columns.length"
+        >
+          <slot name="empty">
+          </slot>
+        </td>
+      </tr>
     </tbody>
   </table>
 </template>
