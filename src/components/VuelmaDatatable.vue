@@ -102,11 +102,19 @@ export default {
     },
     sortAsc: {
       type: String,
-      default: '+',
+      default: `
+        <span class="icon">
+          <i class="fa fa-sort-asc"></i>
+        </span>
+      `,
     },
     sortDesc: {
       type: String,
-      default: '-',
+      default: `
+        <span class="icon">
+          <i class="fa fa-sort-desc"></i>
+        </span>
+      `,
     },
 
     /**
