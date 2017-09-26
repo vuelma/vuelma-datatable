@@ -51,10 +51,12 @@
       ]"
       :rows="rows"
       :sort="sort"
-      :sort-asc="sortAsc"
       :filter-params.sync="filterParams"
       @update:sort="updateSort"
     >
+      <template slot="empty">
+        No results found.
+      </template>
       <template scope="props" slot="actions">
         <button
           class="button"
@@ -90,11 +92,6 @@ export default {
   data() {
     return {
       sort: '',
-      sortAsc: `
-        <span class="icon">
-          <i class="fa fa-home">+</i>
-        </span>
-      `,
       filterParams: {
         name: '',
         age: '',
@@ -148,10 +145,17 @@ export default {
 
 <style lang="scss">
 @import '~bulma';
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome";
+
 .Vuelma-Datatable {
 
   &__header {
     cursor: pointer;
+  }
+
+  .Vuelma-Datatable__cell-empty {
+    text-align: center;
   }
 }
 </style>
