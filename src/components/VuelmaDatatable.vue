@@ -2,18 +2,13 @@
   <table class="Vuelma-Datatable table">
     <thead class="Vuelma-Datatable__head">
       <tr class="Vuelma-Datatable__row">
-        <th
-          class="Vuelma-Datatable__header"
+        <vuelma-datatable-header
           v-for="column in columns"
-          @click="updateSort(column)"
-        >
-          <span v-html="column.header"></span>
-
-          <span
-            v-if="sort.replace('-', '') === column.name && sort"
-            v-html="(sort === column.name) ? sortAsc : sortDesc"
-          ></span>
-        </th>
+          v-bind="$props"
+          :column="column"
+          :key="column.name"
+          @update:sort="updateSort"
+        ></vuelma-datatable-header>
       </tr>
 
       <tr
@@ -74,11 +69,13 @@
 
 <script>
 import VuelmaDatatableFilter from './VuelmaDatatableFilter';
+import VuelmaDatatableHeader from './VuelmaDatatableHeader';
 
 export default {
   name: 'vuelma-datatable',
   components: {
     VuelmaDatatableFilter,
+    VuelmaDatatableHeader,
   },
   props: {
     /**
@@ -135,14 +132,8 @@ export default {
      * Emit an update sort event to be handled
      * outside the component.
      */
-    updateSort(column) {
-      if (column.sort) {
-        if (column.name === this.sort) {
-          this.$emit('update:sort', `-${this.sort}`);
-        } else {
-          this.$emit('update:sort', column.name);
-        }
-      }
+    updateSort(sort) {
+      this.$emit('update:sort', sort);
     },
 
     /**
