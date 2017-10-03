@@ -3,7 +3,7 @@
     class="Vuelma-Datatable__header"
     @click="updateSort"
   >
-    <span v-html="column.header"></span>
+    <span v-html="header"></span>
 
     <span
       v-if="sort.replace('-', '') === sortKey && sort"
@@ -27,6 +27,19 @@ export default {
      */
     sortKey() {
       return (typeof this.column.sort === 'boolean') ? this.column.name : this.column.sort;
+    },
+
+    /**
+     * Return the header column name.
+     */
+    header() {
+      if (this.column.header) {
+        return this.column.header;
+      }
+
+      return this.column.name.split('_').map(char => (
+        char.charAt(0).toUpperCase() + char.substring(1)
+      )).join(' ');
     },
   },
   methods: {
