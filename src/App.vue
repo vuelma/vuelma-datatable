@@ -12,7 +12,7 @@
           header: '<i>Age</i>',
           name: 'age',
           filter: true,
-          sort: true,
+          sort: 'edad',
         },
         {
           header: 'Email',

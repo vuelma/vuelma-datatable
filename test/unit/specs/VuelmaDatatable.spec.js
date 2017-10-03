@@ -72,25 +72,12 @@ function getComponent(newProps = {}) {
 describe('VuelmaDatatable.vue', () => {
   describe('updateSort()', () => {
     it('should dispatch update:sort with the right payload', () => {
-      let vm = getComponent();
-      let spy = sinon.spy();
+      const vm = getComponent();
+      const spy = sinon.spy();
       vm.$on('update:sort', spy);
-      vm.updateSort(vm.columns[0]);
+      vm.updateSort(vm.columns[0].name);
 
       expect(spy).to.have.been.calledWith('name');
-
-      vm = getComponent({ sort: 'name' });
-      spy = sinon.spy();
-      vm.$on('update:sort', spy);
-      vm.updateSort(vm.columns[0]);
-
-      expect(spy).to.have.been.calledWith('-name');
-
-      spy = sinon.spy();
-      vm.$on('update:sort', spy);
-      vm.updateSort({ ...vm.columns[0], sort: false });
-
-      expect(spy).to.have.been.not.calledWith('name');
     });
   });
 
