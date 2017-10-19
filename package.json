@@ -1,6 +1,6 @@
 {
   "name": "vuelma-datatable",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Datatable component powered by Vuelma",
   "keywords": [
     "vue",

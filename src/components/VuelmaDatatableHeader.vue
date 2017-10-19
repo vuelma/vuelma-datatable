@@ -1,6 +1,6 @@
 <template>
   <th
-    class="Vuelma-Datatable__header"
+    :class="className"
     @click="updateSort"
   >
     <span v-html="header"></span>
@@ -40,6 +40,17 @@ export default {
       return this.column.name.split('_').map(char => (
         char.charAt(0).toUpperCase() + char.substring(1)
       )).join(' ');
+    },
+
+    /**
+     * Return the header class name.
+     */
+    className() {
+      if (this.column.sort) {
+        return 'Vuelma-Datatable__header--sortable';
+      }
+
+      return 'Vuelma-Datatable__header';
     },
   },
   methods: {
